@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created with JFLAP 7.1.-->
+<!-- Autômato: Autômato 8 (executar8.c) -->
+<!-- Estruturas: if=1, else=1, while=1, for=0 -->
+<structure>
+	<type>fa</type>
+	<automaton>
+		<!--The list of states.-->
+		<state id="0" name="q0">
+			<x>100.0</x>
+			<y>100.0</y>
+			<initial/>
+			
+			<label x="100.0" y="80.0">Início</label>
+		</state>
+		<state id="1" name="q1">
+			<x>250.0</x>
+			<y>80.0</y>
+			
+			
+			<label x="250.0" y="60.0">if</label>
+		</state>
+		<state id="2" name="q2">
+			<x>400.0</x>
+			<y>100.0</y>
+			
+			
+			<label x="400.0" y="80.0">loop</label>
+		</state>
+		<state id="3" name="q3">
+			<x>150.0</x>
+			<y>220.0</y>
+			
+			
+			<label x="150.0" y="200.0">q3</label>
+		</state>
+		<state id="4" name="q4">
+			<x>350.0</x>
+			<y>220.0</y>
+			
+			<final/>
+			<label x="350.0" y="200.0">Fim</label>
+		</state>
+		<!--The list of transitions.-->
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>a &lt; b</read>
+			<label>Entrada</label>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>2</to>
+			<read>true</read>
+			<label>Verdadeiro</label>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>3</to>
+			<read>loop</read>
+			<label>Iteração</label>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>4</to>
+			<read>processo</read>
+			<label>Processo</label>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>1</to>
+			<read>loop</read>
+			<label>Loop continua</label>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>4</to>
+			<read>fim</read>
+			<label>Saída</label>
+		</transition>
+	</automaton>
+</structure>

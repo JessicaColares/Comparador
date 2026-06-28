@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created with JFLAP 7.1.-->
+<!-- Autômato: Autômato 2 (executar2.c) -->
+<!-- Estruturas: if=3, else=3, while=0, for=0 -->
+<structure>
+	<type>fa</type>
+	<automaton>
+		<!--The list of states.-->
+		<state id="0" name="q0">
+			<x>60.0</x>
+			<y>80.0</y>
+			<initial/>
+			
+			<label x="60.0" y="60.0">Início</label>
+		</state>
+		<state id="1" name="q1">
+			<x>180.0</x>
+			<y>60.0</y>
+			
+			
+			<label x="180.0" y="40.0">if</label>
+		</state>
+		<state id="2" name="q2">
+			<x>300.0</x>
+			<y>60.0</y>
+			
+			
+			<label x="300.0" y="40.0">if</label>
+		</state>
+		<state id="3" name="q3">
+			<x>420.0</x>
+			<y>80.0</y>
+			
+			
+			<label x="420.0" y="60.0">if</label>
+		</state>
+		<state id="4" name="q4">
+			<x>80.0</x>
+			<y>220.0</y>
+			
+			
+			<label x="80.0" y="200.0">q4</label>
+		</state>
+		<state id="5" name="q5">
+			<x>200.0</x>
+			<y>240.0</y>
+			
+			
+			<label x="200.0" y="220.0">q5</label>
+		</state>
+		<state id="6" name="q6">
+			<x>320.0</x>
+			<y>220.0</y>
+			
+			
+			<label x="320.0" y="200.0">q6</label>
+		</state>
+		<state id="7" name="q7">
+			<x>440.0</x>
+			<y>200.0</y>
+			
+			<final/>
+			<label x="440.0" y="180.0">Fim</label>
+		</state>
+		<!--The list of transitions.-->
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>a &lt; b</read>
+			<label>Entrada</label>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>2</to>
+			<read>true</read>
+			<label>Verdadeiro</label>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>3</to>
+			<read>false</read>
+			<label>Falso</label>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>4</to>
+			<read>true</read>
+			<label>Verdadeiro</label>
+		</transition>
+		<transition>
+			<from>4</from>
+			<to>5</to>
+			<read>processo</read>
+			<label>Processo</label>
+		</transition>
+		<transition>
+			<from>5</from>
+			<to>6</to>
+			<read>processo</read>
+			<label>Processo</label>
+		</transition>
+		<transition>
+			<from>6</from>
+			<to>7</to>
+			<read>processo</read>
+			<label>Processo</label>
+		</transition>
+		<transition>
+			<from>6</from>
+			<to>7</to>
+			<read>fim</read>
+			<label>Saída</label>
+		</transition>
+	</automaton>
+</structure>

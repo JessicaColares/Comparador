@@ -5,7 +5,7 @@ Todos os automatos estão na pasta 'automatos'.
 ### 1. Dê permissão aos scripts
 
 ```
-chmod +x testar_multiplos_automatos.sh setup_multiplos_automatos.sh analisar_ferramentas.sh
+chmod +x testar_multiplos_automatos.sh setup_multiplos_automatos.sh analisar_ferramentas.sh gerar_jflap_automatos.sh
 ```
 
 ### 2. Configure o ambiente
@@ -20,8 +20,15 @@ chmod +x testar_multiplos_automatos.sh setup_multiplos_automatos.sh analisar_fer
 ./testar_multiplos_automatos.sh
 ```
 
-### 4. Escolha as opções no menu interativo
+### 4. Gerador de .jff para JFLAP
 
-## Guia de como usar a versão inicial
+```
+./gerar_jflap_automatos.sh
+```
+
+## Observações
+
+Todos os códigos a serem testados estão na pasta automatos. A versão .jff deles será gerada em jff_gerados.
 
 A princípio eu testei com apenas um autômato na pasta chamada 'Manual', basicamente é só rodar o makefile na pasta principal.
+
