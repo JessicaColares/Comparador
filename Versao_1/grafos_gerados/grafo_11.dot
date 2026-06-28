@@ -1,0 +1,20 @@
+digraph GrafoFluxo_11 {
+    node [shape=box, style=filled, fillcolor=lightblue];
+    edge [color=blue];
+    
+    // Nós do grafo de fluxo
+    N0 [label="Início"];
+    N1 [label="while 1"];
+    N2 [label="Processo"];
+    N3 [label="Processo"];
+    N4 [label="Processo"];
+    N5 [label="Fim"];
+    
+    // Transições
+    N0 -> N1;
+    N1 -> N2;
+    N2 -> N3;
+    N3 -> N4;
+    N4 -> N5;
+    N1 -> N2 [label="loop", color=red];
+}

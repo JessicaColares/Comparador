@@ -5,7 +5,7 @@ Todos os automatos estão na pasta 'automatos'.
 ### 1. Dê permissão aos scripts
 
 ```
-chmod +x testar_multiplos_automatos.sh setup_multiplos_automatos.sh analisar_completo.sh
+chmod +x testar_multiplos_automatos.sh setup_multiplos_automatos.sh analisar_ferramentas.sh gerar_jflap_automatos.sh
 ```
 
 ### 2. Configure o ambiente

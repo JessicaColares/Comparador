@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Automato</key>
+	<string>14</string>
+	<key>Nome</key>
+	<string>Autômato 14</string>
+	<key>Complexidade</key>
+	<integer>6</integer>
+	<key>Classificacao</key>
+	<string>Média - Aceitável</string>
+	<key>CasosTeste</key>
+	<array>
+		<dict>
+			<key>a</key>
+			<integer>10</integer>
+			<key>b</key>
+			<integer>5</integer>
+			<key>resultado</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>a</key>
+			<integer>5</integer>
+			<key>b</key>
+			<integer>10</integer>
+			<key>resultado</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>a</key>
+			<integer>10</integer>
+			<key>b</key>
+			<integer>5</integer>
+			<key>resultado</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>a</key>
+			<integer>5</integer>
+			<key>b</key>
+			<integer>10</integer>
+			<key>resultado</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>a</key>
+			<integer>3</integer>
+			<key>b</key>
+			<integer>10</integer>
+			<key>resultado</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+</dict>
+</plist>

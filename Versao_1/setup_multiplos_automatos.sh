@@ -111,6 +111,18 @@ instalar_linux() {
     echo -e "\n${YELLOW}▶ Instalando SPIN...${NC}"
     sudo apt-get install -y spin
     
+    # Graphviz (para gerar imagens dos grafos)
+    echo -e "\n${YELLOW}▶ Instalando Graphviz...${NC}"
+    sudo apt-get install -y graphviz
+    
+    # gcov (para cobertura de código)
+    echo -e "\n${YELLOW}▶ Instalando gcov...${NC}"
+    sudo apt-get install -y gcov
+    
+    # lcov (para relatórios de cobertura)
+    echo -e "\n${YELLOW}▶ Instalando lcov...${NC}"
+    sudo apt-get install -y lcov
+    
     echo -e "\n${GREEN}✓ Todas as ferramentas foram instaladas!${NC}"
 }
 
@@ -155,6 +167,23 @@ instalar_macos() {
     # SPIN
     echo -e "\n${YELLOW}▶ Instalando SPIN...${NC}"
     brew install spin
+    
+    # Graphviz (para gerar imagens dos grafos)
+    echo -e "\n${YELLOW}▶ Instalando Graphviz...${NC}"
+    brew install graphviz
+    
+    # gcov (já vem com GCC)
+    echo -e "\n${YELLOW}▶ Verificando gcov...${NC}"
+    if ! command -v gcov &> /dev/null; then
+        echo -e "   ${YELLOW}⚠ gcov pode não estar disponível separadamente${NC}"
+        echo -e "   ${YELLOW}   Use gcov com o GCC instalado${NC}"
+    else
+        echo -e "   ${GREEN}✓ gcov disponível${NC}"
+    fi
+    
+    # lcov
+    echo -e "\n${YELLOW}▶ Instalando lcov...${NC}"
+    brew install lcov
     
     echo -e "\n${GREEN}✓ Todas as ferramentas foram instaladas!${NC}"
     echo -e "${YELLOW}⚠ Nota: Valgrind pode ter limitações no macOS${NC}"
@@ -203,17 +232,24 @@ instalar_windows_msys() {
         echo -e "\n${YELLOW}▶ Instalando Clang...${NC}"
         pacman -S --noconfirm mingw-w64-x86_64-clang
         
+        # Graphviz (pode estar disponível no MSYS2)
+        echo -e "\n${YELLOW}▶ Tentando instalar Graphviz...${NC}"
+        pacman -S --noconfirm mingw-w64-x86_64-graphviz || echo -e "   ${YELLOW}⚠ Graphviz não disponível no MSYS2${NC}"
+        
         echo -e "\n${YELLOW}⚠ CUnit, Cppcheck, Valgrind e SPIN podem não estar disponíveis${NC}"
         
     elif command -v choco &> /dev/null; then
         echo -e "${GREEN}✓ Chocolatey detectado${NC}"
-        choco install gcc cppcheck -y
+        choco install gcc cppcheck graphviz -y
     else
         echo -e "${RED}⚠ Nenhum gerenciador de pacotes detectado${NC}"
         echo -e "${YELLOW}Para instalar as ferramentas manualmente:${NC}"
         echo "  1. Instale o WSL (Windows Subsystem for Linux)"
         echo "  2. Ou instale o MSYS2 (https://www.msys2.org/)"
         echo "  3. Ou instale o Chocolatey (https://chocolatey.org/)"
+        echo ""
+        echo -e "${YELLOW}Para Graphviz no Windows:${NC}"
+        echo "  Baixe em: https://graphviz.org/download/"
     fi
     
     echo -e "\n${YELLOW}⚠ RECOMENDAÇÃO: Instale o WSL para melhor experiência${NC}"
@@ -251,8 +287,42 @@ configurar_permissoes() {
     if [[ "$OS" != "windows" ]]; then
         chmod +x testar_multiplos_automatos.sh 2>/dev/null && echo -e "   ${GREEN}✓ testar_multiplos_automatos.sh${NC}"
         chmod +x analisar_ferramentas.sh 2>/dev/null && echo -e "   ${GREEN}✓ analisar_ferramentas.sh${NC}"
+        chmod +x analisar_complexidade.sh 2>/dev/null && echo -e "   ${GREEN}✓ analisar_complexidade.sh${NC}"
+        chmod +x gerar_jflap_automatos.sh 2>/dev/null && echo -e "   ${GREEN}✓ gerar_jflap_automatos.sh${NC}"
     else
         echo -e "   ${YELLOW}⚠ Permissões não configuradas (Windows)${NC}"
+    fi
+}
+
+# =============================================
+# VERIFICAÇÃO DE INSTALAÇÃO
+# =============================================
+verificar_instalacao() {
+    echo -e "\n${BLUE}Verificando ferramentas instaladas...${NC}"
+    echo "=============================================="
+    
+    local FERRAMENTAS=("gcc" "clang" "spin" "dot" "gcov" "lcov" "cppcheck" "valgrind")
+    local INSTALADAS=0
+    local FALTANDO=0
+    
+    for tool in "${FERRAMENTAS[@]}"; do
+        if command -v "$tool" &> /dev/null; then
+            echo -e "   ${GREEN}✓ $tool${NC}"
+            INSTALADAS=$((INSTALADAS+1))
+        else
+            echo -e "   ${RED}✗ $tool (não encontrado)${NC}"
+            FALTANDO=$((FALTANDO+1))
+        fi
+    done
+    
+    echo ""
+    echo -e "   ${BLUE}Resumo:${NC} $INSTALADAS instaladas, $FALTANDO faltando"
+    
+    if [ $FALTANDO -gt 0 ]; then
+        echo -e "   ${YELLOW}⚠ Algumas ferramentas não foram encontradas.${NC}"
+        echo -e "   ${YELLOW}   Execute 'sudo apt-get install <ferramenta>' ou 'brew install <ferramenta>'${NC}"
+    else
+        echo -e "   ${GREEN}✓ Todas as ferramentas estão instaladas!${NC}"
     fi
 }
 
@@ -266,6 +336,7 @@ menu_principal() {
     echo -e "${BLUE}=============================================${NC}"
     echo "1) Detectar sistema automaticamente"
     echo "2) Escolher sistema manualmente"
+    echo "3) Verificar instalação"
     echo "0) Sair"
     echo ""
     echo -n "Escolha uma opção: "
@@ -280,6 +351,10 @@ menu_principal() {
             ;;
         2)
             menu_sistema
+            ;;
+        3)
+            verificar_instalacao
+            return
             ;;
         0)
             echo -e "\n${GREEN}Até mais!${NC}"
@@ -318,10 +393,20 @@ menu_principal() {
     # Configurar permissões
     configurar_permissoes
     
-    # Criar pasta automatos
+    # Criar pastas
     if [ ! -d "automatos" ]; then
         mkdir -p automatos
         echo -e "   ${GREEN}✓ Pasta 'automatos/' criada${NC}"
+    fi
+    
+    if [ ! -d "grafos_gerados" ]; then
+        mkdir -p grafos_gerados
+        echo -e "   ${GREEN}✓ Pasta 'grafos_gerados/' criada${NC}"
+    fi
+    
+    if [ ! -d "analise_complexidade" ]; then
+        mkdir -p analise_complexidade
+        echo -e "   ${GREEN}✓ Pasta 'analise_complexidade/' criada${NC}"
     fi
     
     # Resumo final
@@ -329,8 +414,10 @@ menu_principal() {
     echo -e "  AMBIENTE CONFIGURADO COM SUCESSO!"
     echo -e "==============================================${NC}"
     
-    echo -e "\n${YELLOW}Para iniciar os testes:${NC}"
-    echo -e "   ${GREEN}./testar_multiplos_automatos.sh${NC}"
+    echo -e "\n${YELLOW}Scripts disponíveis:${NC}"
+    echo -e "   ${GREEN}./testar_multiplos_automatos.sh${NC} - Executa testes com CUnit/Daikon"
+    echo -e "   ${GREEN}./analisar_complexidade.sh${NC}   - Análise de complexidade ciclomática"
+    echo -e "   ${GREEN}./gerar_jflap_automatos.sh${NC}   - Gera autômatos para JFLAP"
     
     echo -e "\n${YELLOW}Notas importantes:${NC}"
     if [[ "$OS" == "windows" ]]; then
@@ -340,8 +427,10 @@ menu_principal() {
     elif [[ "$OS" == "macos" ]]; then
         echo -e "   • Valgrind pode ter limitações no macOS"
         echo -e "   • Certifique-se de ter o Xcode Command Line Tools instalado"
+        echo -e "   • Graphviz instalado para gerar imagens dos grafos"
     else
         echo -e "   • Todas as ferramentas foram instaladas"
+        echo -e "   • Graphviz instalado para gerar imagens dos grafos"
     fi
 }
 

@@ -1,0 +1,30 @@
+        -:    0:Source:executar.c
+        -:    0:Graph:test_executar-executar.gcno
+        -:    0:Data:test_executar-executar.gcda
+        -:    0:Runs:1
+        7:    1:int executar(int a, int b) {
+        7:    2:    int resultado = 0;
+        7:    3:    int passo = 0;
+        7:    4:    int max_iter = 100;  // Limite de segurança
+        -:    5:    
+       13:    6:    while (a < b && a > 0 && passo < max_iter) {
+        6:    7:        resultado = 1;
+        6:    8:        if (passo % 2 == 0) {
+        5:    9:            a = a * 2;
+        -:   10:        } else {
+        1:   11:            a = a / 2;
+        -:   12:            // Garantir que não fique preso em 1
+        1:   13:            if (a == 1 && passo % 2 == 1) {
+        1:   14:                a = a + 1;  // Força sair do loop se ficar oscilando
+        -:   15:            }
+        -:   16:        }
+        6:   17:        passo++;
+        -:   18:    }
+        -:   19:    
+        -:   20:    // Se atingiu o limite, indica que o loop foi interrompido
+        7:   21:    if (passo >= max_iter) {
+    #####:   22:        return -1;  // Loop interrompido por segurança
+        -:   23:    }
+        -:   24:    
+        7:   25:    return resultado;
+        -:   26:}

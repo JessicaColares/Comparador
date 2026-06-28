@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created with JFLAP 7.1.-->
+<!-- Autômato: Autômato 13 (executar13.c) -->
+<!-- Complexidade: 3 -->
+<structure>
+	<type>fa</type>
+	<automaton>
+		<!--The list of states.-->
+		<state id="0" name="q0">
+			<x>80.0</x>
+			<y>150.0</y>
+			<initial/>
+			
+			<label x="80.0" y="130.0">Início</label>
+		</state>
+		<state id="1" name="q1">
+			<x>150.0</x>
+			<y>150.0</y>
+			
+			
+			<label x="150.0" y="130.0">if 1</label>
+		</state>
+		<state id="2" name="q2">
+			<x>220.0</x>
+			<y>150.0</y>
+			
+			
+			<label x="220.0" y="130.0">loop 1</label>
+		</state>
+		<state id="3" name="q3">
+			<x>290.0</x>
+			<y>150.0</y>
+			
+			
+			<label x="290.0" y="130.0">q3</label>
+		</state>
+		<state id="4" name="q4">
+			<x>360.0</x>
+			<y>150.0</y>
+			
+			<final/>
+			<label x="360.0" y="130.0">Fim</label>
+		</state>
+		<!--The list of transitions.-->
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>a=10,b=5</read>
+			<label>Teste 1: 0</label>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>2</to>
+			<read>a=5,b=10</read>
+			<label>Teste 2: 1</label>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>3</to>
+			<read>a=10,b=5</read>
+			<label>Teste 3: 0</label>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>4</to>
+			<read>a=5,b=10</read>
+			<label>Teste 4: 1</label>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>4</to>
+			<read>fim</read>
+			<label>Saída</label>
+		</transition>
+	</automaton>
+</structure>

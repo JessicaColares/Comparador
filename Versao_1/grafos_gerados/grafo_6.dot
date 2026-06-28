@@ -1,0 +1,33 @@
+digraph GrafoFluxo_6 {
+    node [shape=box, style=filled, fillcolor=lightblue];
+    edge [color=blue];
+    
+    // Nós do grafo de fluxo
+    N0 [label="Início"];
+    N1 [label="if 1"];
+    N2 [label="if 2"];
+    N3 [label="if 3"];
+    N4 [label="if 4"];
+    N5 [label="Processo"];
+    N6 [label="Processo"];
+    N7 [label="Processo"];
+    N8 [label="Processo"];
+    N9 [label="Processo"];
+    N10 [label="Processo"];
+    N11 [label="Fim"];
+    
+    // Transições
+    N0 -> N1;
+    N1 -> N2;
+    N2 -> N3;
+    N3 -> N4;
+    N4 -> N5;
+    N5 -> N6;
+    N6 -> N7;
+    N7 -> N8;
+    N8 -> N9;
+    N9 -> N10;
+    N10 -> N11;
+    N0 -> N1 [label="if", color=green];
+    N1 -> N10 [label="else", color=green];
+}

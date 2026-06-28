@@ -1,0 +1,58 @@
+
+=== DAIKON (ANALISE DINAMICA) ===
+Detector de invariantes atraves de execucao instrumentada
+
+Executando casos de teste para coleta de dados...
+
+
+Daikon - Caso 1: Cadeia 112
+DAIKON_ENTER executar: a=5, b=6
+DAIKON_EXIT executar: resultado=3
+VALORES: a=5, b=6, resultado=3
+
+Daikon - Caso 2: Cadeia 1111112
+DAIKON_ENTER executar: a=5, b=10
+DAIKON_EXIT executar: resultado=5
+VALORES: a=5, b=10, resultado=5
+
+Daikon - Caso 3: Cadeia 12
+DAIKON_ENTER executar: a=1, b=3
+DAIKON_EXIT executar: resultado=1
+VALORES: a=1, b=3, resultado=1
+
+Daikon - Caso 4: Nao entra no loop
+DAIKON_ENTER executar: a=10, b=5
+DAIKON_EXIT executar: resultado=6
+VALORES: a=10, b=5, resultado=6
+
+Daikon - Caso 5: A igual a B
+DAIKON_ENTER executar: a=5, b=5
+DAIKON_EXIT executar: resultado=0
+VALORES: a=5, b=5, resultado=0
+
+Daikon - Caso 6: Valores negativos
+DAIKON_ENTER executar: a=-5, b=-1
+DAIKON_EXIT executar: resultado=2
+VALORES: a=-5, b=-1, resultado=2
+
+Daikon - Caso 7: Cadeia complexa
+DAIKON_ENTER executar: a=6, b=9
+DAIKON_EXIT executar: resultado=4
+VALORES: a=6, b=9, resultado=4
+
+Coleta de dados concluida!
+
+Resumo Daikon:
+  - 7 execucoes instrumentadas
+  - Valores capturados em pontos do programa
+  - Dados podem ser analisados para encontrar invariantes
+  - Exemplos de invariantes que poderiam ser detectados:
+     1. resultado sempre e 0 ou 1
+     2. se a <= b, resultado = 0
+     3. durante loop: a sempre decrementa
+  - Classificacao: METODO DINAMICO
+
+Para uso real do Daikon:
+  1. Compile com instrumentacao: java daikon.DynComp test_daikon
+  2. Execute: java daikon.Chicory --dtrace-file=test.dtrace ./test_daikon
+  3. Analise: java daikon.Daikon test.dtrace

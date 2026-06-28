@@ -1,0 +1,48 @@
+rm -f test_executar *.o *.gcno *.gcda *.gcov *-executar.* *-test_executar.*
+Compilando com cobertura...
+gcc -Wall -g -fprofile-arcs -ftest-coverage -o test_executar test_executar.c executar.c -lcunit
+Executando testes...
+./test_executar
+
+
+     CUnit - A unit testing framework for C - Version 2.1-3
+     http://cunit.sourceforge.net/
+
+
+Suite: Suite_Executar
+  Test: Cadeia 112 ...Teste: a=5, b=6 - Cadeia 112
+passed
+  Test: Cadeia 1111112 ...Teste: a=5, b=10 - Cadeia 1111112
+passed
+  Test: Cadeia 11121112 ...Teste: a=6, b=9 - Cadeia 11121112
+passed
+  Test: Não entra no while ...Teste: a=10, b=5 - Não entra no while
+passed
+  Test: A igual a B ...Teste: a=5, b=5 - A igual a B
+passed
+  Test: Cadeia 12 ...Teste: a=1, b=3 - Cadeia 12
+passed
+  Test: Valores negativos ...Teste: a=-5, b=-1 - Valores negativos
+FAILED
+    1. test_executar.c:44  - CU_ASSERT_EQUAL(executar(-5, -1),1)
+
+Run Summary:    Type  Total    Ran Passed Failed Inactive
+              suites      1      1    n/a      0        0
+               tests      7      7      6      1        0
+             asserts      7      7      6      1      n/a
+
+Elapsed time =    0.000 seconds
+Gerando relatório de cobertura...
+No executable lines
+File 'executar.c'
+Lines executed:93.33% of 15
+Creating 'executar.c.gcov'
+
+Lines executed:93.33% of 15
+=== RELATÓRIO DE COBERTURA ===
+Análise do arquivo: executar.c
+Linhas cobertas: 15/16 (93.75%)
+Linhas não cobertas: 1
+
+Linhas não executadas:
+26:    #####:   22:        return -1;  // Loop interrompido por segurança
