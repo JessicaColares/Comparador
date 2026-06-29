@@ -20,10 +20,10 @@ chmod +x testar_multiplos_automatos.sh setup_multiplos_automatos.sh analisar_com
 ./testar_multiplos_automatos.sh
 ```
 
-### 4. Gerador de .jff para JFLAP
+### 4. Gerador de .jff para JFLAP e analisador de complexidade usando complexidade ciclomática
 
 ```
-./gerar_jflap_automatos.sh
+./analisar_completo.sh
 ```
 
 ## Observações
